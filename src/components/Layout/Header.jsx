@@ -5,7 +5,7 @@ function Header() {
   return (
     <header>
       <nav>
-        <Link to="/">Descubra Nobres</Link>{' '}
+        <Link to="/">Conheça Nobres</Link>{' '}
 
         <Link to="/destino">Destino</Link>{' '}
 

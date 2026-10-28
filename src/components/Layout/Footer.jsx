@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer>
-      <p>Descubra Nobres — Experiências que você escolhe. Uma viagem que a gente organiza.</p>
+      <p>Conheça Nobres — Experiências que você escolhe. Uma viagem que a gente organiza.</p>
     </footer>
   );
 }
