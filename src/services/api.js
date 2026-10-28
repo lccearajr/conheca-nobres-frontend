@@ -1,8 +1,11 @@
 import axios from 'axios';
 
 // Crie uma instância do Axios
+// Em produção, defina VITE_API_URL (ex.: https://api.conhecanobres.com.br).
+export const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '');
+
 const api = axios.create({
-  baseURL: 'http://localhost:3000', // URL base do seu backend
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'; // Importe useDispatch
-import { useNavigate } from 'react-router-dom'; // Importe useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import { selecionarHospedagem } from '../../store/slices/roteiroSlice'; // Importe a ação
 
 const HospedagemCard = ({ hospedagem }) => {
@@ -36,10 +36,6 @@ const HospedagemCard = ({ hospedagem }) => {
     dispatch(selecionarHospedagem(hospedagem)); // Despacha a hospedagem completa
     alert(`"${hospedagem.nome}" adicionada ao seu roteiro!`);
     navigate('/meu-roteiro'); // Redireciona para a página do roteiro
-  };
-
-  const handleVerDetalhes = () => {
-    navigate(`/hospedagens/${hospedagem.id}`); // Redireciona para a página de detalhes
   };
 
   return (
@@ -140,20 +136,21 @@ const HospedagemCard = ({ hospedagem }) => {
       </div>
 
       <div style={{ padding: '16px', borderTop: '1px solid #eee', display: 'flex', gap: '10px' }}>
-        <button
-          onClick={handleVerDetalhes}
+        {/* <Link> gera <a href>, que os buscadores conseguem seguir (botão com navigate não). */}
+        <Link
+          to={`/hospedagens/${hospedagem.id}`}
           style={{
             backgroundColor: '#007bff',
             color: 'white',
-            border: 'none',
             padding: '8px 12px',
             borderRadius: '5px',
-            cursor: 'pointer',
             flex: 1,
+            textAlign: 'center',
+            textDecoration: 'none',
           }}
         >
           Ver Detalhes
-        </button>
+        </Link>
         <button
           onClick={handleAdicionarHospedagem}
           style={{

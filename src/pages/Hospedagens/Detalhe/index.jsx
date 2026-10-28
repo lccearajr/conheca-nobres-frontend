@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getHospedagemById } from '../../../services/hospedagens'; // Importa a função de serviço
+import Seo from '../../../components/SEO/Seo';
+import { absoluteUrl } from '../../../config/site';
 
 function HospedagemDetalhe() {
   const { id } = useParams();
@@ -20,14 +22,44 @@ function HospedagemDetalhe() {
       .finally(() => setCarregando(false));
   }, [id]);
 
-  if (carregando) return <p style={{ padding: '20px' }}>Carregando detalhes da hospedagem...</p>;
-  if (erro) return <p style={{ padding: '20px', color: 'red' }}>{erro}</p>;
-  if (!hospedagem) return <p style={{ padding: '20px' }}>Hospedagem não encontrada.</p>;
+  const path = `/hospedagens/${id}`;
+  if (carregando) return <p style={{ padding: '20px' }}><Seo title="Hospedagem" path={path} />Carregando detalhes da hospedagem...</p>;
+  if (erro || !hospedagem) {
+    return (
+      <p style={{ padding: '20px', color: erro ? 'red' : undefined }}>
+        <Seo title="Hospedagem não encontrada" path={path} noindex />
+        {erro || 'Hospedagem não encontrada.'}
+      </p>
+    );
+  }
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: hospedagem.nome,
+    description: hospedagem.descricao || undefined,
+    url: absoluteUrl(path),
+    priceRange: hospedagem.faixa_de_preco || undefined,
+    petsAllowed: hospedagem.aceita_animais ?? hospedagem.aceita_pet ?? undefined,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: hospedagem.endereco || undefined,
+      addressLocality: hospedagem.cidade || 'Nobres',
+      addressRegion: 'MT',
+      addressCountry: 'BR',
+    },
+  };
 
   const campo = (valor) => valor ?? 'Informação em atualização';
 
   return (
     <div style={{ padding: '20px' }}>
+      <Seo
+        title={`${hospedagem.nome} — hospedagem em Nobres (MT)`}
+        description={hospedagem.descricao || undefined}
+        path={path}
+        jsonLd={jsonLd}
+      />
       <Link to="/hospedagens" style={{ textDecoration: 'none', color: 'blue' }}>← Voltar para hospedagens</Link>
 
       <div style={{ background: '#ddd', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '16px 0' }}>

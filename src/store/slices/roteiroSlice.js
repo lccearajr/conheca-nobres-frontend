@@ -3,6 +3,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const roteiroSalvo = (() => {
+  // No prerender (Node) não existe localStorage.
+  if (typeof localStorage === 'undefined') return null;
   try {
     const dados = localStorage.getItem('roteiro');
 

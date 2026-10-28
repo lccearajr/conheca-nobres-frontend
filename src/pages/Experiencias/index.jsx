@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getExperienciasByCategoria } from '../../services/experiencias'; // Importa a função correta
 import ExperienciaCard from '../../components/UI/ExperienciaCard';
 import { CATEGORIAS } from '../../utils/categorias'; // Assumindo que CATEGORIAS é um array de objetos { id, nome }
+import Seo from '../../components/SEO/Seo';
 
 function Experiencias() {
   const [experiencias, setExperiencias] = useState([]);
@@ -30,7 +31,12 @@ function Experiencias() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Experiências</h1>
+      <Seo
+        title="Passeios e experiências em Nobres e Bom Jardim"
+        description="Flutuações, cachoeiras, balneários, boia cross e contemplação em Nobres e Bom Jardim (MT). Compare duração, distância, idade mínima e valores de referência."
+        path="/experiencias"
+      />
+      <h1>Experiências em Nobres e Bom Jardim</h1>
 
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
         <button

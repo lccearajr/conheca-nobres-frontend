@@ -1,13 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>conheca-nobres-frontend</title>
+    <meta name="theme-color" content="#0b7a75" />
+
+    <!-- Tags padrão (data-seo): substituídas por página no prerender e removidas pelo main.jsx antes do React montar. -->
+    <title data-seo>Conheça Nobres — Turismo em Nobres e Bom Jardim, MT</title>
+    <meta data-seo name="description" content="Planeje sua viagem para Nobres e Bom Jardim (MT): flutuações em águas cristalinas, Aquário Encantado, Rio Triste, Lagoa das Araras, hospedagens e roteiros com voucher único." />
+    <meta data-seo property="og:site_name" content="Conheça Nobres" />
+    <meta data-seo property="og:locale" content="pt_BR" />
+    <meta data-seo property="og:type" content="website" />
+    <meta data-seo property="og:title" content="Conheça Nobres — Turismo em Nobres e Bom Jardim, MT" />
+    <meta data-seo property="og:description" content="Flutuações, cachoeiras, balneários, hospedagens e roteiros em Nobres e Bom Jardim, Mato Grosso." />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://conhecanobres.com.br/#website",
+            "url": "https://conhecanobres.com.br/",
+            "name": "Conheça Nobres",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://conhecanobres.com.br/#organization" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://conhecanobres.com.br/#organization",
+            "name": "Conheça Nobres",
+            "url": "https://conhecanobres.com.br/",
+            "sameAs": ["https://www.instagram.com/conhecanobresmt/"]
+          },
+          {
+            "@type": "TouristDestination",
+            "@id": "https://conhecanobres.com.br/#destino",
+            "name": "Nobres e Bom Jardim",
+            "description": "Polo de ecoturismo de Mato Grosso conhecido pelas nascentes e rios de águas cristalinas, flutuações, cachoeiras e observação de aves.",
+            "url": "https://conhecanobres.com.br/destino",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Nobres",
+              "addressRegion": "MT",
+              "addressCountry": "BR"
+            },
+            "touristType": ["Ecoturismo", "Turismo de aventura", "Turismo em família"]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Conheça Nobres — Turismo em Nobres e Bom Jardim, MT</h1>
+      <p>Guia para planejar sua viagem a Nobres e ao distrito de Bom Jardim, em Mato Grosso: flutuações, cachoeiras, balneários, hospedagens e roteiros.</p>
+      <ul>
+        <li><a href="/destino">Destino: como chegar, melhor época e voucher único</a></li>
+        <li><a href="/experiencias">Experiências e atrativos</a></li>
+        <li><a href="/hospedagens">Hospedagens</a></li>
+      </ul>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

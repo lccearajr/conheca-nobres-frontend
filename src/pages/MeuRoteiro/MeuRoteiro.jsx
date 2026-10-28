@@ -29,6 +29,8 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import Seo from '../../components/SEO/Seo';
+import { API_URL } from '../../services/api';
 
 // Componente ItemSortable para cada item da lista
 function ItemSortable({ item, onRemove }) {
@@ -217,7 +219,7 @@ const MeuRoteiro = () => {
       }
 
       console.log('Salvando roteiro:', roteiro);
-      const response = await fetch('http://localhost:3000/viagens', {
+      const response = await fetch(`${API_URL}/viagens`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -293,6 +295,7 @@ const MeuRoteiro = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <Seo title="Meu roteiro" path="/meu-roteiro" noindex />
       <h1>Meu Roteiro</h1>
 
       <div style={{ marginBottom: '20px' }}>

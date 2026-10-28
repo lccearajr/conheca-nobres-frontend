@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom'; // Adicionado u
 import { useDispatch } from 'react-redux'; // Adicionado useDispatch
 import { getExperienciaById } from '../../../services/experiencias'; // Nome da função corrigido
 import { adicionarItemAoRoteiro } from '../../../store/slices/roteiroSlice'; // Importa a ação do Redux
+import Seo from '../../../components/SEO/Seo';
+import { absoluteUrl } from '../../../config/site';
 
 function ExperienciaDetalhe() {
   const { id } = useParams(); // Hook para pegar o ID da URL <sources>[2,6]</sources>
@@ -40,15 +42,45 @@ function ExperienciaDetalhe() {
     }
   };
 
-  if (carregando) return <p style={{ padding: '20px' }}>Carregando...</p>;
-  if (erro) return <p style={{ padding: '20px', color: 'red' }}>{erro}</p>;
-  if (!experiencia) return <p style={{ padding: '20px' }}>Experiência não encontrada.</p>;
+  const path = `/experiencias/${id}`;
+  if (carregando) return <p style={{ padding: '20px' }}><Seo title="Experiência" path={path} />Carregando...</p>;
+  if (erro || !experiencia) {
+    return (
+      <p style={{ padding: '20px', color: erro ? 'red' : undefined }}>
+        <Seo title="Experiência não encontrada" path={path} noindex />
+        {erro || 'Experiência não encontrada.'}
+      </p>
+    );
+  }
+
+  const descricaoSeo = experiencia.descricao_curta || experiencia.descricao_completa;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristAttraction',
+    name: experiencia.nome,
+    description: descricaoSeo || undefined,
+    url: absoluteUrl(path),
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: experiencia.cidade || 'Nobres',
+      addressRegion: 'MT',
+      addressCountry: 'BR',
+    },
+    isAccessibleForFree: false,
+  };
 
   // Função auxiliar para exibir campos, tratando valores nulos
   const campo = (valor) => valor ?? 'Informação em atualização';
 
   return (
     <div style={{ padding: '20px' }}>
+      <Seo
+        title={`${experiencia.nome} em Nobres (MT)`}
+        description={descricaoSeo || undefined}
+        path={path}
+        type="article"
+        jsonLd={jsonLd}
+      />
       <Link to="/experiencias" style={{ textDecoration: 'none', color: 'blue' }}>← Voltar para experiências</Link>
 
       <div style={{ background: '#ddd', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '16px 0' }}>

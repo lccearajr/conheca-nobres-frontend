@@ -1,15 +1,13 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-
 import Header from './components/Layout/Header';
 import AppRoutes from './routes/AppRoutes';
 
+// O Router fica fora do App (BrowserRouter no cliente, StaticRouter no prerender).
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <AppRoutes />
-    </BrowserRouter>
+    </>
   );
 }
 
